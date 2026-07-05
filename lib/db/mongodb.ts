@@ -12,7 +12,13 @@ export async function connectDB() {
   if (cached.conn) return cached.conn;
 
   if (!cached.promise) {
-    cached.promise = mongoose.connect(MONGODB_URI, { dbName: MONGODB_DB });
+    const opts: mongoose.ConnectOptions = {
+      dbName: MONGODB_DB,
+      maxPoolSize: 10,
+      serverSelectionTimeoutMS: 10000,
+      socketTimeoutMS: 45000,
+    };
+    cached.promise = mongoose.connect(MONGODB_URI, opts);
   }
 
   try {

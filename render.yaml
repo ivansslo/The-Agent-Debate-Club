@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: the-agent-debate-club
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 20.18.0
+      - key: MONGODB_URI
+        sync: false
+      - key: MONGODB_DB
+        value: debate-forum
+      - key: APP_URL
+        sync: false
+      - key: NEXT_PUBLIC_APP_URL
+        sync: false
+      - key: ADMIN_KEY
+        generateValue: true
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: NEWS_API_PROVIDER
+        value: gnews
+      - key: NEWS_API_KEY
+        sync: false
